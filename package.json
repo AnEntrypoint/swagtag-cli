@@ -1,0 +1,44 @@
+{
+  "name": "hyper-relay",
+  "version": "0.2.24",
+  "description": "TCP relay for hyperswarm (tunnel)",
+  "main": "main.js",
+  "scripts": {
+    "start": "node socks.js 1080 glitch"
+  },
+  "dependencies": {
+    "@hyperswarm/dht": "next",
+    "hi-base32": "^0.5.1",
+    "hypercore-crypto": "^2.3.0",
+    "pump": "^3.0.0",
+    "socksv5": "^0.0.6",
+    "ssh2": "^1.5.0"
+  },
+  "bin": {
+    "hyper-tcp-relay-client": "client.js",
+    "hyper-tcp-relay-server": "server.js",
+    "hyper-socks-relay-server": "socks.js",
+    "hyper-relay-client": "stdclient.js",
+    "hyper-relay-server": "stdserver.js"
+  },
+  "bugs": {
+    "url": "https://github.com/lanmower/hyper-relay/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "engines": {
+    "node": "12.x"
+  },
+  "homepage": "https://github.com/lanmower/hyper-relay#readme",
+  "keywords": [
+    "node",
+    "hyperswarm",
+    "tunnel",
+    "tcp",
+    "relay"
+  ],
+  "license": "MIT",
+  "repository": {
+    "url": "git+https://github.com/lanmower/hyper-relay.git"
+  }
+}
