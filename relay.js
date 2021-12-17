@@ -41,7 +41,16 @@ module.exports = () => {
       server.listen(keyPair);
       return keyPair.publicKey;
     },
-    /* reflect a remote port locally */
+    dns: (key) => {
+      const keyPair = crypto.keyPair(crypto.data(Buffer.from(key)));
+      const server = node.createServer();
+      server.on("connection", function(servsock) {
+          servsock.write(Buffer.from(JSON.stringify(server.address())))
+          servsock.end();
+      });
+      server.listen(keyPair);
+      return keyPair.publicKey;
+    },
     client: (hexPublicKey, port, stdio) => {
       const publicKey = Buffer.from(hexPublicKey, 'hex');
       if (stdio) {
