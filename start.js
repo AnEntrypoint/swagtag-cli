@@ -11,7 +11,7 @@ if(process.env.type == 'tun') {
       type: 'list',
       name: 'type',
       message: 'Select a mode of operation:',
-      choices: ['uDDNS (the domain leads to your ip)', 'HyperWEB tunnel (the domain leads to an http host via this app)'],
+      choices: ['DDNS (advertises your public ip)', 'tunnel (lets you share a local host to the web)'],
     },
     {
       name: 'key',
@@ -20,14 +20,14 @@ if(process.env.type == 'tun') {
   ])
   .then(answers => {
     global.key = answers.key;
-    if(answers.type.startsWith('uDDNS')) {
+    if(answers.type.startsWith('DDNS')) {
       const out = require('./relay.js')().dns(key);
 	       fs.writeFileSync('.env',`
 type=dns
 key=${key}
 `)
-      console.log('Set your µDNS address to: ');
-      console.log('ddns:'+b32.encode(out).replace('====','').toLowerCase());
+      console.log('Set your address to DDNS with the following key');
+      console.log(b32.encode(out).replace('====','').toLowerCase());
     } else {
 	setTimeout(()=>{
 	inquirer.prompt([
@@ -47,10 +47,10 @@ key=${key}
 port=${ans.port}
 host=${ans.host}
 `)
-	       console.log('Set your µDNS address to: ');
-               console.log('tun:'+b32.encode(out).replace('====','').toLowerCase());
+	       console.log('Set your address to tunnel with the following key:');
+               console.log(b32.encode(out).replace('====','').toLowerCase());
                console.log('Or visit');
-               console.log('https://'+b32.encode(out).replace('====','').toLowerCase()+'.entrypoint.ga');
+               console.log('https://'+b32.encode(out).replace('====','').toLowerCase()+'.avax.ga');
 	});
 	},1000);
 
